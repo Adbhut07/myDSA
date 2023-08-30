@@ -26,11 +26,7 @@ void merge(int *arr,int s,int e){
         if(first[index1]<second[index2]){
             arr[mainArrayIndex++]=first[index1++];
         }
-        if(first[index1]>second[index2]){
-            arr[mainArrayIndex++]=second[index2++];
-        }
-        if(first[index1]==second[index2]){
-            arr[mainArrayIndex++]=first[index1++];
+        else{
             arr[mainArrayIndex++]=second[index2++];
         }
     }
@@ -40,6 +36,9 @@ void merge(int *arr,int s,int e){
     while(index2<len2){
         arr[mainArrayIndex++]=second[index2++];
     }
+
+    delete []first;
+    delete []second;
 }
 void mergeSort(int *arr,int s, int e){
     //..base case

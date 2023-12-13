@@ -1,7 +1,8 @@
-#include<stdio.h>
-#include<string.h>
-//question 1
-// Define the structure for a student record
+#include <stdio.h>
+#include <string.h>
+// question 1
+//  Define the structure for a student record
+/*
 struct Student {
     int rollNumber;
     char name[50];
@@ -43,80 +44,212 @@ int main() {
 
     return 0;
 }
+*/
 
-//question 4
+
+// question 4
+/*
+int n = 100;
+int arr[100];
+int front = -1;
+int back = -1;
+int isEmpty()
+{
+    if (front == -1 || front > back)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int isFull()
+{
+    if (back == n - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void push(int x)
+{
+    if (isFull())
+    {
+        printf("Queue is full\n");
+        return;
+    }
+    back++;
+    arr[back] = x;
+
+    if (front == -1)
+    {
+        front++;
+    }
+}
+
+void pop()
+{
+    if (isEmpty())
+    {
+        printf("queue is empty\n");
+        return;
+    }
+    front++;
+}
+int peek()
+{
+    if (isEmpty())
+    {
+        printf("no element present in queue\n");
+        return -1;
+    }
+    return arr[front];
+}
+int main()
+{
+    push(1);
+    push(2);
+    push(3);
+    push(4);
+    push(5);
+    push(6);
+
+    printf("%d ", peek());
+    pop();
+    printf("%d ", peek());
+    pop();
+    printf("%d ", peek());
+    pop();
+    printf("%d ", peek());
+    pop();
+    printf("%d ", peek());
+    pop();
+    printf("%d ", peek());
+    return 0;
+}
+*/
+
+
+//Q5) Write functions to add and delete items from a circular queue implemented as an array. Assume any global variables required.
+   // *IMPORTANT*
+
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAX_SIZE 100 // Maximum size of the queue
+int size = 100;
+int q[100];
+int front = -1;
+int rear = -1;
 
-// Global queue implementation as an array
-int QUEUE[MAX_SIZE];
-int front = -1; // Points to the front of the queue
-int rear = -1;  // Points to the rear of the queue
-
-// Function to check if the queue is empty
-int isEmpty() {
-    return front == -1 && rear == -1;
+int isFull(){
+   if (rear==size-1 && front==0){
+    return 1;
+   }
+   else if (rear == (front-1)%(size-1)){
+    return 1;
+   }   
+   else return 0;         
 }
 
-// Function to check if the queue is full
-int isFull() {
-    return (rear + 1) % MAX_SIZE == front;
-}
 
-// Function to insert an element into the queue
-void enqueue(int value) {
-    if (isFull()) {
-        printf("Queue is full. Cannot enqueue.\n");
-        return;
-    } else if (isEmpty()) {
+
+int isEmpty(){
+    if (front==-1) return 1;
+    else return 0;
+}
+  
+void enQ(int x){                  // adding an element
+    if (isFull()){
+        printf("Queue is Full");
+    }
+    else{
+       if (front==-1){                        // when we add first element
         front = rear = 0;
-    } else {
-        rear = (rear + 1) % MAX_SIZE;
-    }
-    QUEUE[rear] = value;
-}
-
-// Function to delete an element from the queue
-void dequeue() {
-    if (isEmpty()) {
-        printf("Queue is empty. Cannot dequeue.\n");
-        return;
-    } else if (front == rear) {
-        front = rear = -1;
-    } else {
-        front = (front + 1) % MAX_SIZE;
+       }
+       else if (rear==size-1 && front!=0){         // when rear is at last but out front is not 0 so we have extra space for adding.
+             rear = 0;
+       }
+       else{
+          rear++;
+       }
+       
+       q[rear] = x;
     }
 }
 
-// Function to print the elements in the queue
-void displayQueue() {
-    if (isEmpty()) {
-        printf("Queue is empty.\n");
-        return;
+
+void deQ(){
+    if (isEmpty()){
+        printf("Queue is Empty");
     }
-    int i = front;
-    printf("Queue elements: ");
-    while (i != rear) {
-        printf("%d ", QUEUE[i]);
-        i = (i + 1) % MAX_SIZE;
-    }
-    printf("%d\n", QUEUE[rear]);
+    else{
+        if (front==rear){           // only one element is present
+             front = rear = -1;
+        }
+        else if (front==size-1){    
+            front = 0;
+        }
+        else{
+            front++;
+        }
+
+     }
 }
 
-int main() {
-    enqueue(10);
-    enqueue(20);
-    enqueue(30);
-    enqueue(40);
+int main(){
 
-    displayQueue(); // Should print: 10 20 30 40
-
-    dequeue();
-    dequeue();
-
-    displayQueue(); // Should print: 30 40
 
     return 0;
 }
 
+// question 7
+/*
+int s1[100];
+int s2[100];
+void enQueue(int x)
+{
+    // Move all elements from s1 to s2
+    while (!s1.empty())
+    {
+        s2.push(s1.top());
+        s1.pop();
+    }
+
+    // Push item into s1
+    s1.push(x);
+
+    // Push everything back to s1
+    while (!s2.empty())
+    {
+        s1.push(s2.top());
+        s2.pop();
+    }
+}
+int deQueue()
+{
+    // if both stacks are empty
+    if (s1.empty() && s2.empty())
+    {
+        return -1;
+    }
+
+    // if s2 is empty, move
+    // elements from s1
+    if (s2.empty())
+    {
+        while (!s1.empty())
+        {
+            s2.push(s1.top());
+            s1.pop();
+        }
+    }
+
+    // return the top item from s2
+    int x = s2.top();
+    s2.pop();
+    return x;
+}*/
